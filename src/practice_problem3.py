@@ -460,7 +460,7 @@ def practice_problem3d(sequence):
     ####################################################################
 
     for k in range(len(sequence)):
-        if sequence[k]==0:
+        if sequence[k] == 0:
             return k
     return -1
 
@@ -480,6 +480,8 @@ def practice_problem3d(sequence):
     #          This solution should *** HAVE NO LOOP (no FOR). ***
     ####################################################################
     z = practice_problem3c(sequence)
+    if z == -1:
+        return -1
     return z[0]
 
 

@@ -5,8 +5,8 @@ This problem provides practice at:
   ***  IMPLEMENTING CLASSES.  ***
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Nicolas Bohner.
+"""  # Done: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 ########################################################################
 # Students:
@@ -39,9 +39,9 @@ def main():
     # UN-comment tests as you work the problems.
     ####################################################################
 
-#     run_test_init()
-#     run_test_append_string()
-#     run_test_double()
+    run_test_init()
+    run_test_append_string()
+    run_test_double()
 #     run_test_shrink()
 #     run_test_double_then_shrink()
 #     run_test_reset()
@@ -102,6 +102,11 @@ class Box(object):
         #    DIFFICULTY:      3
         #    TIME ESTIMATE:   5 minutes.
         # --------------------------------------------------------------
+        self.volume = volume
+        self.contents = contents
+
+        if len(contents)>volume:
+            self.contents=""
 
     def append_string(self, additional_contents):
         """
@@ -157,12 +162,44 @@ class Box(object):
         #    and continue working on the problem.
         # --------------------------------------------------------------
 
+        # Determine how much space is available for the new contents,
+        # and then how many characters of the additional_contents
+        # can be appended to this Box's contents:
+
+        space = self.volume - len(self.contents)
+        number_of_characters_to_append = min(space,
+                                             len(additional_contents))
+
+        # Build up a string that is the characters to append
+        # (that is, those that will fit into this Box).
+        # Then append that string to this Box's contents:
+
+        stuff_to_add = ''
+        for k in range(number_of_characters_to_append):
+            stuff_to_add = stuff_to_add + additional_contents[k]
+        self.contents = self.contents + stuff_to_add
+
+        # Build up a string that is the characters that were NOT
+        # appended, by starting at the place where the previous loop
+        # left off and continuing to the end of the additional_contents.
+        # This will be a loop that goes NO times if the entire
+        # additional_contents fits into this Box's contents:
+
+        stuff_to_return = ''
+        for k in range(number_of_characters_to_append,
+                       len(additional_contents)):
+            stuff_to_return = stuff_to_return + additional_contents[k]
+
+        # Return the result from the previous loop:
+
+        return stuff_to_return
+
     def double(self):
         """
         What comes in:
           -- self
         What goes out:
-          Returrns a string that is whatever substring of the
+          Returns a string that is whatever substring of the
           doubled contents did not fit in this Box
           (or the empty string if the entire doubled contents fit)
         Side effects:
@@ -203,6 +240,9 @@ class Box(object):
         # FOR FULL CREDIT, YOUR SOLUTION MUST BE NO MORE THAN
         #    ** TWO **   LINES OF CODE.
         ################################################################
+
+        self.append_string(self.contents)
+
 
     def shrink(self, new_volume):
         """
@@ -419,8 +459,7 @@ class Box(object):
         # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
         #    DIFFICULTY:      4
         #    TIME ESTIMATE:   5 minutes.
-        # --------------------------------------------------------------
-
+        # -------------------------------------------------------------
 
 ########################################################################
 # The TEST functions for the  Box  class begin here.

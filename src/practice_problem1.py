@@ -46,8 +46,8 @@ def main():
 #     run_test_double_then_shrink()
     run_test_reset()
 #     run_test_steal()
-    run_test_get_history()
-#    run_test_combined_box()
+#    run_test_get_history()
+    run_test_combined_box()
 
 
 ########################################################################
@@ -109,13 +109,6 @@ class Box(object):
         if len(contents) > volume:
             self.contents = ""
             self.start_c = ''
-
-
-        self.tally2=0
-        self.tally2=self.tally2+1
-        self.tally=[]
-        self.tally=self.tally+[str(contents)]
-
 
     def append_string(self, additional_contents):
         """
@@ -247,9 +240,8 @@ class Box(object):
         #    ** TWO **   LINES OF CODE.
         ################################################################
 
-        z=self.append_string(self.contents)
+        z = self.append_string(self.contents)
         return z
-
 
     def shrink(self, new_volume):
         """
@@ -300,7 +292,7 @@ class Box(object):
         # --------------------------------------------------------------
         self.volume = new_volume
 
-        z=self.append_string(self.contents)
+        z = self.append_string(self.contents)
         return z
 
     def double_then_shrink(self, new_volume):
@@ -447,7 +439,7 @@ class Box(object):
         #    DIFFICULTY:      6
         #    TIME ESTIMATE:   5 minutes.
         # --------------------------------------------------------------
-        return self.tally[self.tally2-1]
+
     def combined_box(self, other_box):
         """
         What comes in:
@@ -473,8 +465,8 @@ class Box(object):
         #    DIFFICULTY:      4
         #    TIME ESTIMATE:   5 minutes.
         # -------------------------------------------------------------
-        print(self.contents)
-        print(other_box.contents)
+        #print(self.contents)
+        #print(other_box.contents)
         contents = self.contents+other_box.contents
         print(contents)
         new_box = Box(contents, self.volume+other_box.volume)
@@ -482,6 +474,8 @@ class Box(object):
 ########################################################################
 # The TEST functions for the  Box  class begin here.
 ########################################################################
+
+
 def run_test_init():
     """ Tests the   __init__   method of the Box class. """
     print()
@@ -1063,4 +1057,6 @@ def print_failure_message(message='  *** FAILED the above test. ***',
 # ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
 # ----------------------------------------------------------------------
+
+
 main()
